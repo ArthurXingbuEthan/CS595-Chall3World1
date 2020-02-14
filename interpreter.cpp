@@ -21,9 +21,9 @@ enum FileType : Byte7 { EXE = 0, OBJ = 1 };
 
 struct Permissions {
     Word28 word28;
-    Bool executable() { return (Bool)((word28>>2)&1); }
-    Bool writeable() { return (Bool)((word28>>1)&1); }
-    Bool readable() { return (Bool)((word28)&1); }
+    Bool executable() { return (Bool)((word28>>4)&1); }
+    Bool writeable() { return (Bool)((word28>>5)&1); }
+    Bool readable() { return (Bool)((word28>>6)&1); }
 };
 enum SymbolType : Byte7 { EXTERN, FUNC };
 struct Symbol {
@@ -139,9 +139,9 @@ Permissions getPermissions() {
     Permissions p;
     p.word28 = getByte7();
     ofs << "Permissions: ";
-    if (p.readable()) ofs << "READ";
-    if (p.writeable()) ofs << "WRIT";
-    if (p.executable()) ofs << "EXEC";
+    if (p.readable()) ofs << "READ ";
+    if (p.writeable()) ofs << "WRIT ";
+    if (p.executable()) ofs << "EXEC ";
     ofs << endl;
     return p;
 }
@@ -242,8 +242,25 @@ Segment getSegment() {
     ofs << "   Segment getPermissions:    ";
     s.permissions = getPermissions();
     s.type = (SegmentType)getByte7();
-    ofs << "   Segment type: " << s.type << endl;
-
+    
+    if(s.type == 1)
+        ofs << "   Segment type: NOTE" << endl;
+    else
+        ofs << "   Segment type: PROGBITS" << endl;
+    
+    
+    
+    //ofs << "   Segment type: " << s.type << endl;
+    /*
+    switch (s.type) {
+        case PROGBITS: cout << "PROGBITS\n";
+            break;
+        case NOTE: cout << "NOTE\n";
+            break;
+        default:
+            break;
+    }
+    */
     return s;
 }
 SegmentTable getSegmentTable() {
