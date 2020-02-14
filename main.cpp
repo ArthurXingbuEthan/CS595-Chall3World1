@@ -56,10 +56,10 @@ int main(int argc, char **argv)
     if(stream.length() < 7) break;
     string temp = stream.substr(0,7);
     //cout << getCharacterFrom7Bits(temp) << " , " << "temp: " << reverseString(temp) << endl;
-    cout << lineNum << ": " << reverseString(temp)  << endl;
+    cout << lineNum << ": " << getCharacterFrom7Bits(reverseString(temp))  << endl;
     //cout << endl;
     lineNum++;
-    w << reverseString(temp) << endl;
+    w <<  reverseString(temp) << endl;
     //res += getCharacterFrom7Bits(temp);
     stream = stream.substr(7);
   }
@@ -68,7 +68,6 @@ int main(int argc, char **argv)
   
   ifs.close();
   w.close();
-  
 
   return 0;
 }
