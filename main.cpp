@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   ifstream ifs;
 
   ifs.open("chall1.exe");
-  w.open("output_0.txt");
+  w.open("output_1.txt");
   string stream;
 
   char c;
@@ -50,6 +50,20 @@ int main(int argc, char **argv)
     stream += std::bitset<8>(c).to_string();
     //w << c << endl;
   }
+
+  int lineNum = 0;
+  while(true){
+    if(stream.length() < 7) break;
+    string temp = stream.substr(0,7);
+    //cout << getCharacterFrom7Bits(temp) << " , " << "temp: " << reverseString(temp) << endl;
+    cout << lineNum << ": " << reverseString(temp)  << endl;
+    //cout << endl;
+    lineNum++;
+    w << reverseString(temp) << endl;
+    //res += getCharacterFrom7Bits(temp);
+    stream = stream.substr(7);
+  }
+
   w << stream;
   
   ifs.close();
