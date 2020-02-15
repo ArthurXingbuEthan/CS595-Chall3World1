@@ -135,6 +135,13 @@ char getByte7() {
     char c =  getCharacterFrom7Bits(reverseString( F[MI++] ));
     return c;
 }
+
+string getRawByte7(){
+    if ( MI >= F.size() ) throw noMoreByte7s();
+    string s = reverseString( F[MI++] );
+    return s;
+}
+
 Permissions getPermissions() {
     Permissions p;
     p.word28 = getByte7();
@@ -321,40 +328,38 @@ int main(){
     bool isFin = false;
      for (size_t i = 0; true; i++) {
         try 
-        {                //char temp = getByte7();
-                //if(temp != 0)
-                    //ofs << getByte7();
-            if(!isFin)
-            {
-                
-            }
-            else
-            {
-                //ofs << getByte7() << endl;
-            }
+        {
             //string temp = getText7();
-            //    ofs << temp << endl;
-            contents[i] = getByte7();    
-            ofs<<contents[i] << endl; 
-            //ofs << reverseString( F[MI++] ) << endl;
+            //ofs << temp << endl;
+            /*if(i >= 27 || i <= 2)
+                ofs << getRawByte7() << endl;
+            else
+                ofs << getByte7() << endl;
+                
+            */
             
-                //if(temp == "to be a good program, i need to be able to read the flag")
-                    //isFin = true;
+            contents[i] = getByte7();
             
+            /*
+            if(contents[i] >= 33)    
+                ofs<< contents[i]; 
+            else
+                ofs << endl;
+            */
                 
             numFlags++;
         }
          catch ( noMoreByte7s e ) {break;}
-         //ofs << endl;
+         
      }
 
     
-    
-     for(int i = 0; i < 308; i++)
+     for(int i = 0; i < 308; i+=11)
      {
-         cout << contents[40+i];
+         cout << contents[33+i];
      }
      cout << endl;
+     
     //cout << numFlags << endl;
     
     cout << "ethan rox!!!!!!\n"; 
@@ -363,3 +368,5 @@ int main(){
     return 0;
     
 }
+
+//flag{look_ma_i_can_print!!1}
