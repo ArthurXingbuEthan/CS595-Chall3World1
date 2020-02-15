@@ -113,6 +113,14 @@ char getCharacterFrom7Bits(string s){
   return (char)backtodec;
 }
 
+string getBothByte7(){
+    if ( MI >= F.size() ) throw noMoreByte7s();
+    string temp =  F[MI++];
+    string s = "";
+    s.push_back(getCharacterFrom7Bits(reverseString(temp)));
+    s += ": " + reverseString( temp );
+    return s;
+}
 
 int getWord28() {
     int out = 0;
@@ -331,14 +339,17 @@ int main(){
         {
             //string temp = getText7();
             //ofs << temp << endl;
-            /*if(i >= 27 || i <= 2)
+            /*
+            if(i >= 27 || i <= 2)
                 ofs << getRawByte7() << endl;
             else
                 ofs << getByte7() << endl;
-                
-            */
+                */
+
+            ofs << getBothByte7() << endl;
             
-            contents[i] = getByte7();
+            
+            //contents[i] = getByte7();
             
             /*
             if(contents[i] >= 33)    
